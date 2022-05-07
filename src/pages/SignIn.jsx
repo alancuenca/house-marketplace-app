@@ -61,6 +61,12 @@ function SignIn() {
                         </button>
                     </div>
                 </form>
+
+                {/* Google OAuth */}
+
+                <Link to='/sign-up' className="registerLink">
+                    Sign Up Instead
+                </Link>
             </div>
         </>
     )
