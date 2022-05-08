@@ -137,6 +137,7 @@ button {
 .pageHeader {
   font-size: 2rem;
   font-weight: 800;
+  padding-bottom: 5vw;
 }
 
 .navbar {
