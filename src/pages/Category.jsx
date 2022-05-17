@@ -10,7 +10,7 @@ function Category() {
     const [listings, setListings] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    const params = useParams()
+    const params = useParams() 
 
     useEffect(() => {
         const fetchListings = async () => {
