@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
+import { toast } from 'react-toastify'
 
 function CreateListing() {
   const [geolocationEnabled, setGeolocationEnabled] = useState(true) //set to false to display input of geolocation
@@ -57,11 +58,19 @@ function CreateListing() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted])
-
+// * onSubmit
   const onSubmit = (e) => {
     e.preventDefault()
-  }
 
+    setLoading(true)
+    
+    if (discountedPrice >= regularPrice) {
+      setLoading(false)
+      toast.error('Discounted price needs to be less than the regular price')
+    }
+  }
+  
+// * onMutate
   const onMutate = (e) => {
     let boolean = null
     if (e.target.value === 'true') {
@@ -98,6 +107,7 @@ function CreateListing() {
         <p className="pageHeader">Create a Listing</p>
       </header>
       <main>
+        
         <form onSubmit={onSubmit}>
           <label className='formLabel'>
             Sell / Rent
@@ -108,7 +118,8 @@ function CreateListing() {
               className={type === 'sale' ? 'formButtonActive' : 'formButton'}
               id='type'
               value='sale'
-              onClick={onMutate}>
+              onClick={onMutate}
+            >
               Sell
             </button>
             <button
@@ -116,10 +127,12 @@ function CreateListing() {
               className={type === 'rent' ? 'formButtonActive' : 'formButton'}
               id='type'
               value='rent'
-              onClick={onMutate}>
+              onClick={onMutate}
+            >
               Rent
             </button>
           </div>
+          
           <label className="formLabel">Name</label>
           <input
             className='formInputName'
@@ -282,11 +295,11 @@ function CreateListing() {
 
           {offer && (
             <>
-              <label className='formLabel'>Discount Price</label>
+              <label className='formLabel'>Discounted Price</label>
               <input
                 className='formInputSmall'
                 type='number'
-                id='discountPrice'
+                id='discountedPrice'
                 value={discountedPrice}
                 onChange={onMutate}
                 min='50'
