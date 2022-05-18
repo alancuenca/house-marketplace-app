@@ -124,13 +124,13 @@ function CreateListing() {
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            toast('Upload is ' + progress + '% done')
+            console.log('Upload is ' + progress + '% done')
             switch (snapshot.state) {
               case 'paused':
                 console.log('Upload is paused')
                 break
               case 'running':
-                console.log('Upload is running')
+                console.log('Upload in progress')
                 break
               default:
                 break
