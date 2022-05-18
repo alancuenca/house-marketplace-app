@@ -168,8 +168,10 @@ function CreateListing() {
     formDataCopy.location = address
     delete formDataCopy.images
     delete formDataCopy.address
+    // if no offer delete discounted price
     !formDataCopy.offer && delete formDataCopy.discountedPrice
 
+    // save to the database
     const docRef = await addDoc(collection(db, 'listings'), formDataCopy)
     setLoading(false)
     toast.success('Listing saved')
