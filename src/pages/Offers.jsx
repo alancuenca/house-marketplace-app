@@ -39,6 +39,7 @@ function Offers() {
                 toast.error('Could not fetch listings')
             }
         }
+        
         fetchListings()
     }, [])
 
