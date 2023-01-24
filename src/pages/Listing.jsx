@@ -51,6 +51,7 @@ function Listing() {
             >
                 <img src={shareIcon} alt="shareIcon" />
             </div>
+            {/* show message if linked copied */}
             {shareLinkCopied && <p className='linkCopied'>Link Copied!</p>}
 
             <div className="listingDetails">
@@ -79,7 +80,7 @@ function Listing() {
                     <li>
                         {listing.bedrooms > 1
                             ? `${listing.bedrooms} Bedrooms`
-                            : '1 Bathroom'}
+                            : '1 Bedroom'}
                     </li>
                     <li>
                         {listing.bathrooms > 1
@@ -93,8 +94,15 @@ function Listing() {
                 <p className="listingLocationTitle">Location</p>
 
                 <div className="leafletContainer">
-                    
                 </div>
+                {/* contact owner link */}
+                    {auth.currentUser?.uid !== listing.userRef && (
+                    <Link to={`/contact/${listing.userRef}
+                    ?listingName=${listing.name}`}
+                        className='primaryButton'>
+                            Contact Landlord
+                        </Link>
+                            )};
             </div>
         </main>
     )
