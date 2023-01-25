@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../components/Spinner'
 
 function CreateListing() {
+    // eslint-disable-next-line
   const [geolocationEnabled, setGeolocationEnabled] = useState(true) //set to false to display manual input of geolocation
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -42,7 +43,6 @@ function CreateListing() {
     latitude,
     longitude
   } = formData
-
   const auth = getAuth()
   const navigate = useNavigate()
   const isMounted = useRef(true)
@@ -94,7 +94,7 @@ function CreateListing() {
       location = data.status === 'ZERO_RESULTS'
         ? undefined
         : data.results[0]?.formatted_address // address entered returns an address else if no result, the status will be undefined
-      
+        console.log(data);
       if (location === undefined || location.includes('undefined')) {
         setLoading(false)
         toast.error('Please enter a correct address')

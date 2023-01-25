@@ -96,13 +96,13 @@ function Listing() {
                 <div className="leafletContainer">
                 </div>
                 {/* contact owner link */}
-                    {auth.currentUser?.uid !== listing.userRef && (
+                {auth.currentUser?.uid !== listing.userRef && (
                     <Link to={`/contact/${listing.userRef}
                     ?listingName=${listing.name}`}
                         className='primaryButton'>
-                            Contact Landlord
-                        </Link>
-                            )};
+                        Contact Landlord
+                    </Link>
+                )}
             </div>
         </main>
     )
