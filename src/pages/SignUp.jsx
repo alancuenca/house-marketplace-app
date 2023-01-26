@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import {setDoc, doc, serverTimestamp} from 'firebase/firestore' 
+import {setDoc, doc, serverTimestamp} from 'firebase/firestore'
 import {db} from '../firebase.config'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
@@ -10,9 +10,12 @@ import OAuth from "../components/OAuth"
 
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' })
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: ''
+    })
     const { name, email, password } = formData
-
     const navigate = useNavigate()
 
     const onChange = (e) => {
@@ -38,7 +41,7 @@ function SignUp() {
             // setDoc updates the database and adds User to user collection
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
             navigate('/')
-            
+
         } catch (error){
             toast.error('Something went wrong with registration')
         }
@@ -49,7 +52,7 @@ function SignUp() {
             <div className="pageContainer">
                 <header>
                     <div className="pageHeader">
-                        Welcome Back!
+                        Create Account
                     </div>
                 </header>
                 <form onSubmit={onSubmit}>
